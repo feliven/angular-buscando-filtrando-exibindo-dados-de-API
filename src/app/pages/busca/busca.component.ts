@@ -8,6 +8,8 @@ import { PassagensService } from 'src/app/core/services/passagens.service';
   standalone: false,
 })
 export class BuscaComponent implements OnInit {
+  passagens: unknown[] = [];
+
   constructor(private passagensService: PassagensService) {}
 
   ngOnInit(): void {
@@ -20,8 +22,10 @@ export class BuscaComponent implements OnInit {
       tipo: 'Executiva',
     };
 
-    this.passagensService
-      .getPassagens(buscaPadrao)
-      .subscribe((resposta) => console.log(resposta));
+    this.passagensService.getPassagens(buscaPadrao).subscribe((resposta) => {
+      console.log(resposta);
+      this.passagens.push((resposta as { resultado: unknown[] }).resultado);
+      console.log(this.passagens);
+    });
   }
 }
