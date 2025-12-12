@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PassagensService } from 'src/app/core/services/passagens.service';
+import { ResultadoBuscaPassagem, Passagem } from '../../core/types/type';
 
 @Component({
   selector: 'app-busca',
@@ -8,7 +9,7 @@ import { PassagensService } from 'src/app/core/services/passagens.service';
   standalone: false,
 })
 export class BuscaComponent implements OnInit {
-  passagens: unknown[] = [];
+  listaPassagens: Passagem[] = [];
 
   constructor(private passagensService: PassagensService) {}
 
@@ -24,8 +25,8 @@ export class BuscaComponent implements OnInit {
 
     this.passagensService.getPassagens(buscaPadrao).subscribe((resposta) => {
       console.log(resposta);
-      this.passagens.push((resposta as { resultado: unknown[] }).resultado);
-      console.log(this.passagens);
+      this.listaPassagens = resposta.resultado;
+      console.log(this.listaPassagens);
     });
   }
 }
