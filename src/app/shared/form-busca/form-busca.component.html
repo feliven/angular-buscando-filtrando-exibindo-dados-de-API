@@ -6,18 +6,8 @@
         aria-label="Tipo de passagem"
         formControlName="somenteIda"
       >
-        <mat-button-toggle [value]="false">
-          <mat-icon *ngIf="!formBuscaService.formBusca.get('somenteIda')?.value"
-            >check</mat-icon
-          >
-          IDA E VOLTA
-        </mat-button-toggle>
-        <mat-button-toggle [value]="true">
-          <mat-icon *ngIf="formBuscaService.formBusca.get('somenteIda')?.value"
-            >check</mat-icon
-          >
-          SOMENTE IDA
-        </mat-button-toggle>
+        <mat-button-toggle [value]="false"> IDA E VOLTA </mat-button-toggle>
+        <mat-button-toggle [value]="true"> SOMENTE IDA </mat-button-toggle>
       </mat-button-toggle-group>
       <mat-chip (click)="formBuscaService.openDialog()">
         <div class="inner">
