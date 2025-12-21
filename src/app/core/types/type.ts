@@ -66,3 +66,23 @@ export interface Orcamento {
   taxaEmbarque: number;
   total: number;
 }
+
+export interface DadosParaBusca {
+  somenteIda?: boolean;
+  passageirosAdultos?: number;
+  passageirosCriancas?: number;
+  passageirosBebes?: number;
+  tipo?: string;
+  turno?: string;
+  origemId?: number;
+  destinoId?: number;
+  companhiasId?: number[];
+  precoMin?: number;
+  precoMax?: number;
+  conexoes?: number;
+  tempoVoo?: number;
+  dataIda: string;
+  dataVolta?: string;
+  pagina?: number;
+  porPagina: number;
+}

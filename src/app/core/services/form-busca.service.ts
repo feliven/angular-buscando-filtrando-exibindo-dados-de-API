@@ -4,6 +4,7 @@ import { MatChipSelectionChange } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ModalComponent } from '../../shared/modal/modal.component';
+import { DadosParaBusca, UnidadeFederativa } from '../types/type';
 
 @Injectable({
   providedIn: 'root',
@@ -74,12 +75,49 @@ export class FormBuscaService {
     });
   }
 
-  obterControle(nome: string): FormControl {
+  obterControle<T>(nome: string): FormControl {
     const control = this.formBusca.get(nome);
     if (!control) {
       throw new Error(`FormControl com nome "${nome}" não existe.`);
     }
-    return control as FormControl;
+    return control as FormControl<T>;
+  }
+
+  obterDadosParaBusca(): DadosParaBusca {
+    const dataIdaControlValue: Date = this.obterControle<Date>('dataIda').value;
+    const dataVoltaControlValue: Date =
+      this.obterControle<Date>('dataVolta').value;
+    const somenteIdaControlValue: boolean =
+      this.obterControle<boolean>('somenteIda').value;
+    const adultosControlValue: number =
+      this.obterControle<number>('adultos').value;
+    const criancasControlValue: number =
+      this.obterControle<number>('criancas').value;
+    const bebesControlValue: number = this.obterControle<number>('bebes').value;
+    const tipoPassagemControlValue: string =
+      this.obterControle<string>('tipo').value;
+    const origemControlValue: UnidadeFederativa =
+      this.obterControle<number>('origem').value;
+    const destinoControlValue: UnidadeFederativa =
+      this.obterControle<number>('destino').value;
+
+    const dadosParaBusca: DadosParaBusca = {
+      pagina: 1,
+      porPagina: 10,
+      dataIda: dataIdaControlValue.toISOString(),
+      dataVolta: dataVoltaControlValue
+        ? dataVoltaControlValue.toISOString()
+        : undefined,
+      somenteIda: somenteIdaControlValue,
+      passageirosAdultos: adultosControlValue,
+      passageirosCriancas: criancasControlValue,
+      passageirosBebes: bebesControlValue,
+      tipo: tipoPassagemControlValue,
+      origemId: origemControlValue.id,
+      destinoId: destinoControlValue.id,
+    };
+
+    return dadosParaBusca;
   }
 
   alterarTipo(evento: MatChipSelectionChange, tipo: string) {
