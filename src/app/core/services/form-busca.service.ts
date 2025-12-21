@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipSelectionChange } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
@@ -12,13 +12,15 @@ export class FormBuscaService {
 
   constructor(private dialog: MatDialog) {
     this.formBusca = new FormGroup({
-      somenteIda: new FormControl(false),
-      origem: new FormControl(null),
-      destino: new FormControl(null),
+      somenteIda: new FormControl(false, [Validators.required]),
+      origem: new FormControl(null, [Validators.required]),
+      destino: new FormControl(null, [Validators.required]),
       tipo: new FormControl('Executiva'),
       adultos: new FormControl(3),
       criancas: new FormControl(0),
       bebes: new FormControl(1),
+      dataIda: new FormControl(null, [Validators.required]),
+      dataVolta: new FormControl(null),
     });
   }
 
@@ -32,12 +34,16 @@ export class FormBuscaService {
 
     const criancas = this.formBusca.get('criancas')?.value;
     if (criancas && criancas > 0) {
-      descricao += `${descricao ? ', ' : ''}${criancas} criança${criancas > 1 ? 's' : ''}`;
+      descricao += `${descricao ? ', ' : ''}${criancas} criança${
+        criancas > 1 ? 's' : ''
+      }`;
     }
 
     const bebes = this.formBusca.get('bebes')?.value;
     if (bebes && bebes > 0) {
-      descricao += `${descricao ? ', ' : ''}${bebes} bebê${bebes > 1 ? 's' : ''}`;
+      descricao += `${descricao ? ', ' : ''}${bebes} bebê${
+        bebes > 1 ? 's' : ''
+      }`;
     }
 
     return descricao;
@@ -74,5 +80,9 @@ export class FormBuscaService {
     this.dialog.open(ModalComponent, {
       width: '50%',
     });
+  }
+
+  get formEstaValido() {
+    return this.formBusca.valid;
   }
 }
