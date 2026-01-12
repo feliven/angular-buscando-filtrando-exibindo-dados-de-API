@@ -4,7 +4,7 @@ import { MatChipSelectionChange } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ModalComponent } from '../../shared/modal/modal.component';
-import { DadosParaBusca, UnidadeFederativa } from '../types/type';
+import { Companhia, DadosParaBusca, UnidadeFederativa } from '../types/type';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,7 @@ export class FormBuscaService {
       dataIda: new FormControl(null, [Validators.required]),
       dataVolta,
       conexoes: new FormControl(null),
+      companhias: new FormControl(null),
     });
 
     somenteIda.valueChanges.subscribe((somenteIda) => {
@@ -103,6 +104,8 @@ export class FormBuscaService {
       this.obterControle<UnidadeFederativa>('destino').value;
     const conexoesControlValue: number =
       this.obterControle<number>('conexoes').value;
+    const companhiasControlValue: Companhia =
+      this.obterControle<Companhia>('companhias').value;
 
     const dadosParaBusca: DadosParaBusca = {
       pagina: 1,
@@ -122,6 +125,10 @@ export class FormBuscaService {
 
     if (conexoesControlValue) {
       dadosParaBusca.conexoes = conexoesControlValue;
+    }
+
+    if (companhiasControlValue) {
+      dadosParaBusca.companhiasId?.push(companhiasControlValue.id);
     }
 
     return dadosParaBusca;

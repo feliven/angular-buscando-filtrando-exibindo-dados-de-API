@@ -1,1 +1,17 @@
-<p>companhias works!</p>
+<section class="paradas">
+  <app-label texto="Companhias" />
+  <div class="checkbox-group">
+    @for (opcao of companhias; track $index) {
+    <p>
+      <mat-checkbox
+        color="primary"
+        [value]="opcao.id.toString()"
+        (change)="alternarCompanhia(opcao, $event.checked)"
+        [checked]="companhiaSelecionada(opcao)"
+      >
+        {{ opcao.nome }}
+      </mat-checkbox>
+    </p>
+    }
+  </div>
+</section>
