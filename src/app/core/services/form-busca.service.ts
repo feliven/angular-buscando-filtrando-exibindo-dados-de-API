@@ -26,6 +26,7 @@ export class FormBuscaService {
       bebes: new FormControl(1),
       dataIda: new FormControl(null, [Validators.required]),
       dataVolta,
+      conexoes: new FormControl(null),
     });
 
     somenteIda.valueChanges.subscribe((somenteIda) => {
@@ -97,9 +98,11 @@ export class FormBuscaService {
     const tipoPassagemControlValue: string =
       this.obterControle<string>('tipo').value;
     const origemControlValue: UnidadeFederativa =
-      this.obterControle<number>('origem').value;
+      this.obterControle<UnidadeFederativa>('origem').value;
     const destinoControlValue: UnidadeFederativa =
-      this.obterControle<number>('destino').value;
+      this.obterControle<UnidadeFederativa>('destino').value;
+    const conexoesControlValue: number =
+      this.obterControle<number>('conexoes').value;
 
     const dadosParaBusca: DadosParaBusca = {
       pagina: 1,
@@ -116,6 +119,10 @@ export class FormBuscaService {
       origemId: origemControlValue.id,
       destinoId: destinoControlValue.id,
     };
+
+    if (conexoesControlValue) {
+      dadosParaBusca.conexoes = conexoesControlValue;
+    }
 
     return dadosParaBusca;
   }

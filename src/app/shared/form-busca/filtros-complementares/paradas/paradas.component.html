@@ -1,10 +1,16 @@
 <section class="paradas">
   <app-label texto="Paradas" />
   <div class="checkbox-group">
-    <p *ngFor="let opcao of opcoes">
-      <mat-checkbox color="primary">
+    @for (opcao of opcoes; track $index) {
+    <p>
+      <mat-checkbox
+        color="primary"
+        [value]="opcao.value"
+        (change)="alternarParada(opcao, $event.checked)"
+      >
         {{ opcao.display }}
       </mat-checkbox>
     </p>
+    }
   </div>
 </section>
