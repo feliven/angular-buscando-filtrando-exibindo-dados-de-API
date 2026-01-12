@@ -11,5 +11,10 @@ import { Passagem } from '../../../core/types/type';
 export class PassagemComponent {
   @Input() passagem!: Passagem;
 
-  textoIdaVolta = '';
+  get textoIdaVolta() {
+    if (!this.passagem.dataVolta) {
+      return 'Somente ida';
+    }
+    return 'Ida e volta';
+  }
 }
