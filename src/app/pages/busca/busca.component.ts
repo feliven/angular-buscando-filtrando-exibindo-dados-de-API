@@ -22,13 +22,13 @@ export class BuscaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const buscaPadrao = {
-      data: new Date().toISOString,
+    const buscaPadrao: DadosParaBusca = {
+      dataIda: new Date().toISOString(),
       pagina: 1,
       porPagina: 25,
       somenteIda: false,
       passageirosAdultos: 1,
-      tipo: 'Executiva',
+      tipo: 'Econômica',
     };
 
     const busca = this.formBuscaService.formEstaValido

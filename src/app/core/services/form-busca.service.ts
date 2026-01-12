@@ -20,7 +20,7 @@ export class FormBuscaService {
       somenteIda,
       origem: new FormControl(null, [Validators.required]),
       destino: new FormControl(null, [Validators.required]),
-      tipo: new FormControl('Executiva'),
+      tipo: new FormControl('Econômica'),
       adultos: new FormControl(3),
       criancas: new FormControl(0),
       bebes: new FormControl(1),
