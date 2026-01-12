@@ -28,6 +28,8 @@ export class FormBuscaService {
       dataVolta,
       conexoes: new FormControl(null),
       companhias: new FormControl(null),
+      precoMin: new FormControl(null),
+      precoMax: new FormControl(null),
     });
 
     somenteIda.valueChanges.subscribe((somenteIda) => {
@@ -106,6 +108,10 @@ export class FormBuscaService {
       this.obterControle<number>('conexoes').value;
     const companhiasControlValue: Companhia =
       this.obterControle<Companhia>('companhias').value;
+    const precoMinControlValue: number =
+      this.obterControle<number>('precoMin').value;
+    const precoMaxControlValue: number =
+      this.obterControle<number>('precoMax').value;
 
     const dadosParaBusca: DadosParaBusca = {
       pagina: 1,
@@ -129,6 +135,14 @@ export class FormBuscaService {
 
     if (companhiasControlValue) {
       dadosParaBusca.companhiasId?.push(companhiasControlValue.id);
+    }
+
+    if (precoMinControlValue) {
+      dadosParaBusca.precoMin = precoMinControlValue;
+    }
+
+    if (precoMaxControlValue) {
+      dadosParaBusca.precoMax = precoMaxControlValue;
     }
 
     return dadosParaBusca;

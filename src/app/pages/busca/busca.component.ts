@@ -6,6 +6,7 @@ import {
   DadosParaBusca,
 } from '../../core/types/type';
 import { FormBuscaService } from 'src/app/core/services/form-busca.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-busca',
@@ -35,11 +36,18 @@ export class BuscaComponent implements OnInit {
       ? this.formBuscaService.obterDadosParaBusca()
       : buscaPadrao;
 
-    this.passagensService.getPassagens(busca).subscribe((resposta) => {
-      console.log(resposta);
-      this.listaPassagens = resposta.resultado;
-      console.log(this.listaPassagens);
-    });
+    this.passagensService
+      .getPassagens(busca)
+      .pipe(take(1))
+      .subscribe((resposta) => {
+        console.log(resposta);
+        this.listaPassagens = resposta.resultado;
+        this.formBuscaService.formBusca.patchValue({
+          precoMin: resposta.precoMin,
+          precoMax: resposta.precoMax,
+        });
+        console.log(this.listaPassagens);
+      });
   }
 
   busca(evento: DadosParaBusca) {
