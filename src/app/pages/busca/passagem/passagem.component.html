@@ -34,6 +34,12 @@
               {{ passagem.dataVolta | date : "dd/MM" }}
             </p>
           </div>
+          <div class="grupo">
+            <label>Companhia</label>
+            <p class="box">
+              {{ passagem.companhia?.nome }}
+            </p>
+          </div>
         </div>
       </div>
       <div class="orcamento">
