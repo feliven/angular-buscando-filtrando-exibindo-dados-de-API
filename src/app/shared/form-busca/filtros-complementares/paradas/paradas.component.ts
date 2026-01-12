@@ -13,7 +13,7 @@ import { FormBuscaService } from '../../../../core/services/form-busca.service';
 export class ParadasComponent implements OnInit {
   opcaoSelecionada: OpcaoDeParada | null = null;
 
-  opcoes: OpcaoDeParada[] = [
+  listaOpcoes: OpcaoDeParada[] = [
     {
       display: 'Direto',
       value: '0',
@@ -59,5 +59,16 @@ export class ParadasComponent implements OnInit {
     this.formBuscaService.formBusca.patchValue({
       conexoes: Number(opcao.value),
     });
+  }
+
+  paradaSelecionada(opcao: OpcaoDeParada): boolean {
+    return this.opcaoSelecionada === opcao;
+  }
+
+  incluirParada(opcao: OpcaoDeParada): boolean {
+    if (!this.opcaoSelecionada) {
+      return false;
+    }
+    return this.opcaoSelecionada.value > opcao.value;
   }
 }

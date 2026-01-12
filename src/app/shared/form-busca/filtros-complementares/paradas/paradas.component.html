@@ -1,12 +1,15 @@
 <section class="paradas">
   <app-label texto="Paradas" />
   <div class="checkbox-group">
-    @for (opcao of opcoes; track $index) {
+    @for (opcao of listaOpcoes; track $index) {
     <p>
       <mat-checkbox
         color="primary"
         [value]="opcao.value"
         (change)="alternarParada(opcao, $event.checked)"
+        [checked]="paradaSelecionada(opcao)"
+        [disabled]="incluirParada(opcao)"
+        [indeterminate]="incluirParada(opcao)"
       >
         {{ opcao.display }}
       </mat-checkbox>
