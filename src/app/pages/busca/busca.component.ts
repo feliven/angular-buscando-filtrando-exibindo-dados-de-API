@@ -24,9 +24,11 @@ export class BuscaComponent implements OnInit {
       dataIda: new Date().toISOString(),
       pagina: 1,
       porPagina: 25,
-      somenteIda: false,
+      somenteIda: true,
       passageirosAdultos: 1,
       tipo: 'Econômica',
+      origemId: 9,
+      destinoId: 15,
     };
 
     const busca = this.formBuscaService.formEstaValido
@@ -39,21 +41,25 @@ export class BuscaComponent implements OnInit {
       .subscribe((resposta) => {
         console.log(resposta);
         this.listaPassagens = resposta.resultado;
+        console.log(this.listaPassagens);
+
         this.formBuscaService.formBusca.patchValue({
           precoMin: resposta.precoMin,
           precoMax: resposta.precoMax,
         });
-        this.obterDestaques();
 
-        console.log(this.listaPassagens);
+        this.obterDestaques();
       });
   }
 
   busca(evento: DadosParaBusca) {
     this.passagensService.getPassagens(evento).subscribe((resposta) => {
       console.log(resposta);
+
       this.listaPassagens = resposta.resultado;
       console.log(this.listaPassagens);
+
+      this.obterDestaques();
     });
   }
 
