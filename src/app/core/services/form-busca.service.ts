@@ -106,8 +106,8 @@ export class FormBuscaService {
       this.obterControle<UnidadeFederativa>('destino').value;
     const conexoesControlValue: number =
       this.obterControle<number>('conexoes').value;
-    const companhiasControlValue: Companhia =
-      this.obterControle<Companhia>('companhias').value;
+    const companhiasControlValue: number[] =
+      this.obterControle<number[]>('companhias').value;
     const precoMinControlValue: number =
       this.obterControle<number>('precoMin').value;
     const precoMaxControlValue: number =
@@ -133,8 +133,8 @@ export class FormBuscaService {
       dadosParaBusca.conexoes = conexoesControlValue;
     }
 
-    if (companhiasControlValue) {
-      dadosParaBusca.companhiasId?.push(companhiasControlValue.id);
+    if (companhiasControlValue && companhiasControlValue.length > 0) {
+      dadosParaBusca.companhiasId = companhiasControlValue;
     }
 
     if (precoMinControlValue) {
