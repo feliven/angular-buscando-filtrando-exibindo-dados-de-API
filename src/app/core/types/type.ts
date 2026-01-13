@@ -91,3 +91,9 @@ export interface OpcaoDeParada {
   display: string;
   value: string;
 }
+
+export interface Destaque {
+  maisRapida: Passagem;
+  maisBarata: Passagem;
+  sugerida: Passagem;
+}
