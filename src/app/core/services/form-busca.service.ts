@@ -13,18 +13,32 @@ export class FormBuscaService {
   formBusca: FormGroup;
 
   constructor(private dialog: MatDialog) {
-    const somenteIda = new FormControl(false, [Validators.required]);
+    const somenteIda = new FormControl(true, [Validators.required]);
     const dataVolta = new FormControl(null);
 
     this.formBusca = new FormGroup({
       somenteIda,
-      origem: new FormControl(null, [Validators.required]),
-      destino: new FormControl(null, [Validators.required]),
+      origem: new FormControl(
+        {
+          id: 9,
+          nome: 'Minas Gerais',
+          sigla: 'MG',
+        },
+        [Validators.required]
+      ),
+      destino: new FormControl(
+        {
+          id: 15,
+          nome: 'Rio de Janeiro',
+          sigla: 'RJ',
+        },
+        [Validators.required]
+      ),
       tipo: new FormControl('Econômica'),
       adultos: new FormControl(3),
       criancas: new FormControl(0),
       bebes: new FormControl(1),
-      dataIda: new FormControl(null, [Validators.required]),
+      dataIda: new FormControl(new Date(), [Validators.required]),
       dataVolta,
       conexoes: new FormControl(null),
       companhias: new FormControl(null),
